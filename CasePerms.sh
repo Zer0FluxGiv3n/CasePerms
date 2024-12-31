@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#
+# Description: A simple bash script to capitalize various letters from each line of a file.
+# Author: ZeroFluxGiven
+# Date 2024-12-31
+#
+
+
+# Get arguments from user and assign if they exist.
 file=false
 new_file=false
 
@@ -19,16 +27,19 @@ while getopts ":f:o:" opt; do
 
 done
 
+# Check if user supplied an input file.
 if [[ $file = false ]]; then
    echo "[-] No input file specified. Exiting."
    exit 1
 fi
 
+# Check if the input file even exists
 if [[ ! -f $file ]]; then
     echo "[-] Input file: $file does not exist. Exiting. "
     exit 1
 fi
 
+# If the user did not supply an output filename, create one from the input file.
 if [[ $new_file = false  ]]; then
     file_base=$(basename $file)
     file_ext="${file##*.}"
@@ -37,6 +48,7 @@ fi
 
 echo "[+] Outputting results to $new_file"
 
+# Check if the output file exists. If it does, prompt the user to overwrite.
 if [[ -f $new_file ]]; then
     echo "[.] File $new_file already exists."
     read -p "[.] Do you want to overwrite? [y/n] . . . " confirm < /dev/tty
@@ -55,6 +67,7 @@ fi
 
 touch $new_file
 
+# Function to Capitalize all letters, in every permutation
 cap_all () {
 while read line_f; do
     echo "[+] Processing line: $line_f"
@@ -80,6 +93,7 @@ while read line_f; do
 done < $file
 }
 
+# Function to capitalize onle the first letter of each line, and letters that come after periods.
 cap_dot () {
 	while read line_f; do
 		echo "[+] Process line: $line_f"
@@ -89,6 +103,7 @@ cap_dot () {
 	done < $file
 }
 
+# Function to capitalize just the first letter
 cap_first() {
 	while read line_f; do
 		echo "[+] Processing line: $line_f"
@@ -96,6 +111,7 @@ cap_first() {
 	done < $file
 }
 
+# Prompt user for capitalization option
 read -p "[.] How do you want to capitalize?\n
     [f] First letters of every line\n
     [d] First letters of every line, and after '.'\n
@@ -113,4 +129,4 @@ case $mode in
 		exit 0;;
 esac
 
-echo "[+] Completed processing file $file and output to new file: $new_file"
+echo "[+] Completed processing file $file and output to new file: $new_file
