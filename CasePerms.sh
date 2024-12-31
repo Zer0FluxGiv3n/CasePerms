@@ -25,7 +25,7 @@ if [[ $file = false ]]; then
 fi
 
 if [[ ! -f $file ]]; then
-    echo "[-] Input file: $file does not exist. Exiting . . . "
+    echo "[-] Input file: $file does not exist. Exiting. "
     exit 1
 fi
 
@@ -45,7 +45,7 @@ if [[ -f $new_file ]]; then
     echo "[+] Deleting $new_file"
         rm $new_file
     elif [[ "$confirm" == "n" ]]; then
-        echo "[+] Exiting"
+        echo "[+] Exiting."
         exit 0
     else
         echo "[+] Invlid response. Exiting."
