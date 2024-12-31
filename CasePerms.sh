@@ -1,20 +1,25 @@
 #!/bin/bash
 
 while getopts ":f:" opt; do
-    case $opt in
+   case $OPTARG in
+        -*) echo "Option $opt needs a valid argument for file."
+        exit 1
+        ;;
+   esac
+   case $opt in
         f) file="$OPTARG"
         ;;
-    \?) echo "Invalid option -$OPTARG" >&2
-    exit1
-    ;;
-esac
+        \?) echo "Invalid option -$OPTARG" >&2
+        exit 1
+        ;;
+    esac
 
-case $OPTARG in
-    -*) echo "Option $opt needs a valid argument for file."
-    exit 1
-    ;;
-esac
 done
+
+if [[ ! -f $file ]]; then
+    echo "[-] File: $file does not exist. Exiting . . . "
+    exit 1
+fi
 
 file_base=$(basename $file)
 file_ext="${file##*.}"
