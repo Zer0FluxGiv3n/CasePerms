@@ -19,13 +19,14 @@ The script will then ask what mode to capitalize in:
 
 Finally, it will perform the capitalizations and output each result line-by-line to the output file specified.
 
+## Note:
 I am very new to bash scripting, so don't judge my flawed code too hard! Always open to suggestions on how to improve, thanks!
 
-## Usage
-**General Syntax:**
+## Usage/Examples
+### **General Syntax:**
 `CasePerm.sh -f <inputfile> -o <output file>`
 
-**First letter only:**
+### **First letter only:**
 ```
 $ CasePerm.sh -f users.txt
 
@@ -49,7 +50,7 @@ Tom
 Administrator
 Calvin.hobbes
 ```
-**First letter and after period:**
+### **First letter and after period:**
 ```
 $ CasePerm.sh -f users.txt -o users_period.txt
 
@@ -73,7 +74,7 @@ Tom
 Administrator
 Calvin.Hobbes
 ```
-**Permutations of all letters:**
+### **Permutations of all letters:**
 ```
 $ CasePerm.sh -f users.txt -o users_perm.txt
 
