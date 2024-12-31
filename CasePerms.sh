@@ -1,30 +1,42 @@
 #!/bin/bash
 
-while getopts ":f:" opt; do
-   case $OPTARG in
-        -*) echo "Option $opt needs a valid argument for file."
-        exit 1
-        ;;
-   esac
+file=false
+new_file=false
+
+while getopts ":f:o:" opt; do
    case $opt in
         f) file="$OPTARG"
         ;;
+        o) new_file="$OPTARG"
+        ;;
         \?) echo "Invalid option -$OPTARG" >&2
+        exit 1
+        ;;
+        *) echo "[-] Error parsing command line inputs. Exiting."
         exit 1
         ;;
     esac
 
 done
 
+if [[ $file = false ]]; then
+   echo "[-] No input file specified. Exiting."
+   exit 1
+fi
+
 if [[ ! -f $file ]]; then
-    echo "[-] File: $file does not exist. Exiting . . . "
+    echo "[-] Input file: $file does not exist. Exiting . . . "
     exit 1
 fi
 
-file_base=$(basename $file)
-file_ext="${file##*.}"
-new_file="${file_base%.*}"_cased."${file_ext}"
-echo "[+] Will output results to $new_file"
+if [[ $new_file = false  ]]; then
+    file_base=$(basename $file)
+    file_ext="${file##*.}"
+    new_file="${file_base%.*}"_cased."${file_ext}"
+fi
+
+echo "[+] Outputting results to $new_file"
+
 if [[ -f $new_file ]]; then
     echo "[.] File $new_file already exists."
     read -p "[.] Do you want to overwrite? [y/n] . . . " confirm < /dev/tty
