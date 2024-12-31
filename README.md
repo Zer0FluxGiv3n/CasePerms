@@ -1,6 +1,7 @@
 # CasePerms
 Simple script to take a file, and do various capitalizations for the contents on each line of the file. Got tired of going back doing this manually when I had something like a list of usernames and/or potential passwords.
 
+## Info
 The script will first check if an output file exists of the format `<input file (minues extension)>_cased.<original input file extension>` i.e. `CasePerm.sh -f users.txt` will look for `users_cased.txt` in the current working directory.
 
 If the output file exists, it will ask if you want to overwrite. If the output file doesn't exist, it creates a new one to write to.
@@ -12,7 +13,8 @@ The script will then ask what mode to capitalize in:
 
 Finally, it will perform the capitalizations and output each result line-by-line to the output file specified.
 
+## Usage
 Syntax:
 `CasePerm.sh -f <inputfile>`
 
-I'm a very amateur bash scripted, so don't judge my flawed code too hard!
+I am very new to bash scripting, so don't judge my flawed code too hard!
